@@ -17,11 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<header class="site-header">
+<header class="site-header" data-site-header>
 	<div class="container header-inner">
 		<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'Engintenia home', 'engintenia-theme' ); ?>">
-			<span class="brand-mark" aria-hidden="true"></span>
-			<span class="brand-text"><?php bloginfo( 'name' ); ?></span>
+			<img class="brand-logo" src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/engintenia-logo.svg' ); ?>" alt="<?php esc_attr_e( 'Engintenia', 'engintenia-theme' ); ?>">
 		</a>
 
 		<nav class="primary-nav" aria-label="<?php esc_attr_e( 'Primary navigation', 'engintenia-theme' ); ?>">
@@ -39,6 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<ul class="nav-menu">
 					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'engintenia-theme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/projects' ) ); ?>"><?php esc_html_e( 'Projects', 'engintenia-theme' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/contractors' ) ); ?>"><?php esc_html_e( 'Contractors', 'engintenia-theme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/register' ) ); ?>"><?php esc_html_e( 'Register', 'engintenia-theme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( wp_login_url() ); ?>"><?php esc_html_e( 'Login', 'engintenia-theme' ); ?></a></li>
 				</ul>

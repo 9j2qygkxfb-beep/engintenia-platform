@@ -13,13 +13,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 <footer class="site-footer">
 	<div class="container footer-grid">
 		<div>
-			<a class="brand footer-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a>
-			<p><?php esc_html_e( 'The premium engineering marketplace for projects, proposals, and trusted contractors.', 'engintenia-theme' ); ?></p>
-			<p><?php esc_html_e( 'Contact: hello@engintenia.com', 'engintenia-theme' ); ?></p>
+			<a class="brand footer-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<img class="brand-logo" src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/engintenia-logo.svg' ); ?>" alt="<?php esc_attr_e( 'Engintenia', 'engintenia-theme' ); ?>">
+			</a>
+			<p><?php esc_html_e( 'Engintenia is a premium engineering marketplace connecting enterprise clients with vetted, high-performance contractors.', 'engintenia-theme' ); ?></p>
+			<p><?php esc_html_e( 'Contact: hello@engintenia.com | +1 (800) 410-9090', 'engintenia-theme' ); ?></p>
 			<div class="social-links" aria-label="<?php esc_attr_e( 'Social media', 'engintenia-theme' ); ?>">
 				<a href="#" aria-label="LinkedIn">in</a>
 				<a href="#" aria-label="X">x</a>
 				<a href="#" aria-label="Facebook">f</a>
+				<a href="#" aria-label="YouTube">▶</a>
 			</div>
 		</div>
 		<div>
@@ -27,6 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<ul>
 				<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'engintenia-theme' ); ?></a></li>
 				<li><a href="<?php echo esc_url( home_url( '/projects' ) ); ?>"><?php esc_html_e( 'Projects', 'engintenia-theme' ); ?></a></li>
+				<li><a href="<?php echo esc_url( home_url( '/contractors' ) ); ?>"><?php esc_html_e( 'Contractors', 'engintenia-theme' ); ?></a></li>
 				<li><a href="<?php echo esc_url( home_url( '/register' ) ); ?>"><?php esc_html_e( 'Register', 'engintenia-theme' ); ?></a></li>
 				<li><a href="<?php echo esc_url( wp_login_url() ); ?>"><?php esc_html_e( 'Login', 'engintenia-theme' ); ?></a></li>
 			</ul>
@@ -36,6 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<ul>
 				<li><a href="#"><?php esc_html_e( 'About', 'engintenia-theme' ); ?></a></li>
 				<li><a href="#"><?php esc_html_e( 'Contact', 'engintenia-theme' ); ?></a></li>
+				<li><a href="#"><?php esc_html_e( 'Careers', 'engintenia-theme' ); ?></a></li>
 				<li><a href="#"><?php esc_html_e( 'Privacy', 'engintenia-theme' ); ?></a></li>
 				<li><a href="#"><?php esc_html_e( 'Terms', 'engintenia-theme' ); ?></a></li>
 			</ul>

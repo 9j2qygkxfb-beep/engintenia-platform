@@ -1,6 +1,7 @@
 (function () {
-  const header = document.querySelector('.site-header');
+  const header = document.querySelector('[data-site-header]');
   const slider = document.querySelector('[data-slider]');
+  const reveals = Array.from(document.querySelectorAll('.reveal-up'));
 
   const setHeaderState = () => {
     if (!header) {
@@ -12,6 +13,10 @@
 
   setHeaderState();
   window.addEventListener('scroll', setHeaderState, { passive: true });
+
+  reveals.forEach((item, index) => {
+    item.style.animationDelay = `${Math.min(index * 0.05, 0.45)}s`;
+  });
 
   if (!slider) {
     return;
@@ -29,5 +34,5 @@
     slides[activeIndex].classList.remove('is-active');
     activeIndex = (activeIndex + 1) % slides.length;
     slides[activeIndex].classList.add('is-active');
-  }, 4500);
+  }, 5000);
 })();
