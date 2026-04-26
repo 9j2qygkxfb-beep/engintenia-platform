@@ -1,0 +1,38 @@
+.eng-form {
+  display: grid;
+  gap: 10px;
+  max-width: 720px;
+  padding: 16px;
+  border: 1px solid #e6e8ec;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.eng-form input,
+.eng-form textarea,
+.eng-form select,
+.eng-form button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.eng-form button {
+  background: #1f6feb;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.eng-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.eng-card {
+  border: 1px solid #d0d7de;
+  border-radius: 12px;
+  padding: 16px;
+  background: #f9fbff;
+}
