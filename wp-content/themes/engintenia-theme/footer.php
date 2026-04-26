@@ -14,10 +14,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="container footer-grid">
 		<div>
 			<a class="brand footer-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a>
-			<p><?php esc_html_e( 'The engineering marketplace for projects, proposals, and trusted contractors.', 'engintenia-theme' ); ?></p>
+			<p><?php esc_html_e( 'The premium engineering marketplace for projects, proposals, and trusted contractors.', 'engintenia-theme' ); ?></p>
+			<p><?php esc_html_e( 'Contact: hello@engintenia.com', 'engintenia-theme' ); ?></p>
+			<div class="social-links" aria-label="<?php esc_attr_e( 'Social media', 'engintenia-theme' ); ?>">
+				<a href="#" aria-label="LinkedIn">in</a>
+				<a href="#" aria-label="X">x</a>
+				<a href="#" aria-label="Facebook">f</a>
+			</div>
 		</div>
 		<div>
-			<h4><?php esc_html_e( 'Platform', 'engintenia-theme' ); ?></h4>
+			<h4><?php esc_html_e( 'Marketplace', 'engintenia-theme' ); ?></h4>
 			<ul>
 				<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'engintenia-theme' ); ?></a></li>
 				<li><a href="<?php echo esc_url( home_url( '/projects' ) ); ?>"><?php esc_html_e( 'Projects', 'engintenia-theme' ); ?></a></li>

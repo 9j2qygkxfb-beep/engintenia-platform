@@ -29,13 +29,23 @@ function engintenia_theme_setup() {
 
 add_action( 'wp_enqueue_scripts', 'engintenia_theme_assets' );
 /**
- * Enqueue styles.
+ * Enqueue styles and scripts.
  */
 function engintenia_theme_assets() {
+	$theme = wp_get_theme();
+
 	wp_enqueue_style(
 		'engintenia-theme-style',
 		get_stylesheet_uri(),
 		array(),
-		wp_get_theme()->get( 'Version' )
+		$theme->get( 'Version' )
+	);
+
+	wp_enqueue_script(
+		'engintenia-theme-main',
+		get_template_directory_uri() . '/assets/js/theme.js',
+		array(),
+		$theme->get( 'Version' ),
+		true
 	);
 }

@@ -27,23 +27,51 @@ $featured_contractors = get_users(
 		'order'   => 'DESC',
 	)
 );
+
+$categories = array(
+	array(
+		'icon'  => '📹',
+		'title' => __( 'CCTV Systems', 'engintenia-theme' ),
+	),
+	array(
+		'icon'  => '🌐',
+		'title' => __( 'Networking', 'engintenia-theme' ),
+	),
+	array(
+		'icon'  => '☀️',
+		'title' => __( 'Solar Installations', 'engintenia-theme' ),
+	),
+	array(
+		'icon'  => '🛡️',
+		'title' => __( 'Security', 'engintenia-theme' ),
+	),
+	array(
+		'icon'  => '⚡',
+		'title' => __( 'Electrical Works', 'engintenia-theme' ),
+	),
+	array(
+		'icon'  => '🏗️',
+		'title' => __( 'MEP Contracting', 'engintenia-theme' ),
+	),
+);
 ?>
 <section class="hero-section">
+	<div class="hero-overlay" aria-hidden="true"></div>
 	<div class="container hero-grid">
-		<div>
+		<div class="hero-copy reveal-up">
 			<p class="eyebrow"><?php esc_html_e( 'ENGINTENIA MARKETPLACE', 'engintenia-theme' ); ?></p>
-			<h1><?php esc_html_e( 'Hire proven contractors for every engineering project.', 'engintenia-theme' ); ?></h1>
-			<p class="hero-subtitle"><?php esc_html_e( 'Discover skilled subcontractors, post projects in minutes, and manage delivery from one modern platform.', 'engintenia-theme' ); ?></p>
+			<h1><?php esc_html_e( 'Hire top engineering contractors', 'engintenia-theme' ); ?></h1>
+			<p class="hero-subtitle"><?php esc_html_e( 'Connect with vetted professionals for CCTV, networking, security, solar, and complex engineering delivery.', 'engintenia-theme' ); ?></p>
 			<div class="hero-actions">
 				<a class="btn btn-primary" href="<?php echo esc_url( home_url( '/register' ) ); ?>"><?php esc_html_e( 'Get Started', 'engintenia-theme' ); ?></a>
-				<a class="btn btn-outline" href="<?php echo esc_url( home_url( '/register' ) ); ?>"><?php esc_html_e( 'Become a Contractor', 'engintenia-theme' ); ?></a>
+				<a class="btn btn-outline" href="<?php echo esc_url( home_url( '/register' ) ); ?>"><?php esc_html_e( 'Become Contractor', 'engintenia-theme' ); ?></a>
 			</div>
 		</div>
-		<div class="hero-card">
-			<h3><?php esc_html_e( 'Find projects fast', 'engintenia-theme' ); ?></h3>
+		<div class="hero-card reveal-up">
+			<h3><?php esc_html_e( 'Search projects and services', 'engintenia-theme' ); ?></h3>
 			<form class="project-search-form" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<label class="screen-reader-text" for="eng-search"><?php esc_html_e( 'Search projects', 'engintenia-theme' ); ?></label>
-				<input id="eng-search" type="search" name="s" placeholder="<?php esc_attr_e( 'Search by title, trade, or city', 'engintenia-theme' ); ?>" required>
+				<input id="eng-search" type="search" name="s" placeholder="<?php esc_attr_e( 'Try: Solar maintenance in Houston', 'engintenia-theme' ); ?>" required>
 				<input type="hidden" name="post_type" value="eng_project">
 				<button type="submit" class="btn btn-primary"><?php esc_html_e( 'Search Projects', 'engintenia-theme' ); ?></button>
 			</form>
@@ -53,33 +81,24 @@ $featured_contractors = get_users(
 
 <section class="section-block">
 	<div class="container">
-		<div class="section-heading">
-			<p class="eyebrow"><?php esc_html_e( 'HOW IT WORKS', 'engintenia-theme' ); ?></p>
-			<h2><?php esc_html_e( 'Simple workflow for companies and contractors', 'engintenia-theme' ); ?></h2>
+		<div class="section-heading reveal-up">
+			<p class="eyebrow"><?php esc_html_e( 'CATEGORIES', 'engintenia-theme' ); ?></p>
+			<h2><?php esc_html_e( 'Explore high-demand engineering services', 'engintenia-theme' ); ?></h2>
 		</div>
-		<div class="feature-grid steps-grid">
-			<article class="card">
-				<span class="step-index">01</span>
-				<h3><?php esc_html_e( 'Post your project', 'engintenia-theme' ); ?></h3>
-				<p><?php esc_html_e( 'Create a project with your scope, budget, timeline, and location.', 'engintenia-theme' ); ?></p>
-			</article>
-			<article class="card">
-				<span class="step-index">02</span>
-				<h3><?php esc_html_e( 'Review proposals', 'engintenia-theme' ); ?></h3>
-				<p><?php esc_html_e( 'Qualified contractors submit offers tailored to your requirements.', 'engintenia-theme' ); ?></p>
-			</article>
-			<article class="card">
-				<span class="step-index">03</span>
-				<h3><?php esc_html_e( 'Hire and collaborate', 'engintenia-theme' ); ?></h3>
-				<p><?php esc_html_e( 'Select the right team and track progress from your dashboard.', 'engintenia-theme' ); ?></p>
-			</article>
+		<div class="categories-grid">
+			<?php foreach ( $categories as $category ) : ?>
+				<article class="card category-card reveal-up">
+					<span class="category-icon" aria-hidden="true"><?php echo esc_html( $category['icon'] ); ?></span>
+					<h3><?php echo esc_html( $category['title'] ); ?></h3>
+				</article>
+			<?php endforeach; ?>
 		</div>
 	</div>
 </section>
 
 <section class="section-block section-surface">
 	<div class="container">
-		<div class="section-heading heading-row">
+		<div class="section-heading heading-row reveal-up">
 			<div>
 				<p class="eyebrow"><?php esc_html_e( 'FEATURED PROJECTS', 'engintenia-theme' ); ?></p>
 				<h2><?php esc_html_e( 'Latest opportunities from Engintenia companies', 'engintenia-theme' ); ?></h2>
@@ -91,19 +110,22 @@ $featured_contractors = get_users(
 				<?php while ( $featured_projects_query->have_posts() ) : ?>
 					<?php
 					$featured_projects_query->the_post();
-					$budget = get_post_meta( get_the_ID(), '_eng_budget', true );
+					$budget   = get_post_meta( get_the_ID(), '_eng_budget', true );
+					$location = get_post_meta( get_the_ID(), '_eng_location', true );
 					?>
-					<article class="card project-card">
+					<article class="card project-card reveal-up">
 						<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 						<p><?php echo esc_html( wp_trim_words( get_the_excerpt(), 20 ) ); ?></p>
 						<div class="card-meta">
 							<span><?php esc_html_e( 'Budget', 'engintenia-theme' ); ?>: <?php echo $budget ? esc_html( $budget ) : esc_html__( 'To be discussed', 'engintenia-theme' ); ?></span>
+							<span><?php esc_html_e( 'Location', 'engintenia-theme' ); ?>: <?php echo $location ? esc_html( $location ) : esc_html__( 'Remote / On-site', 'engintenia-theme' ); ?></span>
 						</div>
+						<a class="btn btn-outline" href="<?php the_permalink(); ?>"><?php esc_html_e( 'View Project', 'engintenia-theme' ); ?></a>
 					</article>
 				<?php endwhile; ?>
 				<?php wp_reset_postdata(); ?>
 			<?php else : ?>
-				<article class="card">
+				<article class="card reveal-up">
 					<h3><?php esc_html_e( 'No projects yet', 'engintenia-theme' ); ?></h3>
 					<p><?php esc_html_e( 'New projects will appear here automatically once they are published via Engintenia.', 'engintenia-theme' ); ?></p>
 				</article>
@@ -114,23 +136,29 @@ $featured_contractors = get_users(
 
 <section class="section-block">
 	<div class="container">
-		<div class="section-heading">
-			<p class="eyebrow"><?php esc_html_e( 'FEATURED CONTRACTORS', 'engintenia-theme' ); ?></p>
-			<h2><?php esc_html_e( 'Top subcontractors ready for your next job', 'engintenia-theme' ); ?></h2>
+		<div class="section-heading reveal-up">
+			<p class="eyebrow"><?php esc_html_e( 'TOP CONTRACTORS', 'engintenia-theme' ); ?></p>
+			<h2><?php esc_html_e( 'Top-rated specialists ready for deployment', 'engintenia-theme' ); ?></h2>
 		</div>
 		<div class="feature-grid contractor-grid">
 			<?php if ( ! empty( $featured_contractors ) ) : ?>
 				<?php foreach ( $featured_contractors as $contractor ) : ?>
-					<article class="card contractor-card">
+					<?php
+					$specialization = get_user_meta( $contractor->ID, 'specialization', true );
+					$location       = get_user_meta( $contractor->ID, 'city', true );
+					?>
+					<article class="card contractor-card reveal-up">
+						<?php echo get_avatar( $contractor->ID, 72, '', $contractor->display_name, array( 'class' => 'contractor-avatar' ) ); ?>
 						<h3><?php echo esc_html( $contractor->display_name ); ?></h3>
-						<p><?php echo esc_html( get_user_meta( $contractor->ID, 'specialization', true ) ?: __( 'Specialized contractor', 'engintenia-theme' ) ); ?></p>
+						<p class="rating" aria-label="<?php esc_attr_e( 'Rated 5 out of 5', 'engintenia-theme' ); ?>">★★★★★</p>
+						<p><?php echo esc_html( $specialization ? $specialization : __( 'Specialized contractor', 'engintenia-theme' ) ); ?></p>
 						<div class="card-meta">
-							<span><?php echo esc_html( get_user_meta( $contractor->ID, 'city', true ) ?: __( 'Location available on profile', 'engintenia-theme' ) ); ?></span>
+							<span><?php echo esc_html( $location ? $location : __( 'Location available on profile', 'engintenia-theme' ) ); ?></span>
 						</div>
 					</article>
 				<?php endforeach; ?>
 			<?php else : ?>
-				<article class="card">
+				<article class="card reveal-up">
 					<h3><?php esc_html_e( 'Contractors onboarding', 'engintenia-theme' ); ?></h3>
 					<p><?php esc_html_e( 'Featured contractor profiles will appear once users register as subcontractors.', 'engintenia-theme' ); ?></p>
 				</article>
@@ -141,74 +169,49 @@ $featured_contractors = get_users(
 
 <section class="section-block section-surface">
 	<div class="container">
-		<div class="section-heading">
-			<p class="eyebrow"><?php esc_html_e( 'PRICING', 'engintenia-theme' ); ?></p>
-			<h2><?php esc_html_e( 'Choose the plan that fits your growth stage', 'engintenia-theme' ); ?></h2>
+		<div class="section-heading reveal-up">
+			<p class="eyebrow"><?php esc_html_e( 'HOW IT WORKS', 'engintenia-theme' ); ?></p>
+			<h2><?php esc_html_e( 'From requirement to execution in 3 steps', 'engintenia-theme' ); ?></h2>
 		</div>
-		<div class="feature-grid pricing-grid">
-			<article class="card pricing-card">
-				<h3><?php esc_html_e( 'Starter', 'engintenia-theme' ); ?></h3>
-				<p class="price"><?php esc_html_e( '$0', 'engintenia-theme' ); ?><span><?php esc_html_e( '/month', 'engintenia-theme' ); ?></span></p>
-				<ul>
-					<li><?php esc_html_e( 'Create account profile', 'engintenia-theme' ); ?></li>
-					<li><?php esc_html_e( 'Browse all public projects', 'engintenia-theme' ); ?></li>
-					<li><?php esc_html_e( 'Basic notifications', 'engintenia-theme' ); ?></li>
-				</ul>
+		<div class="feature-grid steps-grid">
+			<article class="card step-card reveal-up">
+				<div class="step-icon" aria-hidden="true">📝</div>
+				<h3><?php esc_html_e( 'Post project brief', 'engintenia-theme' ); ?></h3>
+				<p><?php esc_html_e( 'Share scope, timeline, and preferred budget in minutes.', 'engintenia-theme' ); ?></p>
 			</article>
-			<article class="card pricing-card featured-plan">
-				<span class="plan-badge"><?php esc_html_e( 'Most Popular', 'engintenia-theme' ); ?></span>
-				<h3><?php esc_html_e( 'Professional', 'engintenia-theme' ); ?></h3>
-				<p class="price"><?php esc_html_e( '$20', 'engintenia-theme' ); ?><span><?php esc_html_e( '/month', 'engintenia-theme' ); ?></span></p>
-				<ul>
-					<li><?php esc_html_e( 'Unlimited project bids', 'engintenia-theme' ); ?></li>
-					<li><?php esc_html_e( 'Priority profile visibility', 'engintenia-theme' ); ?></li>
-					<li><?php esc_html_e( 'Direct company notifications', 'engintenia-theme' ); ?></li>
-				</ul>
+			<article class="card step-card reveal-up">
+				<div class="step-icon" aria-hidden="true">🤝</div>
+				<h3><?php esc_html_e( 'Compare top bids', 'engintenia-theme' ); ?></h3>
+				<p><?php esc_html_e( 'Review proposals, ratings, and experience side by side.', 'engintenia-theme' ); ?></p>
 			</article>
-			<article class="card pricing-card">
-				<h3><?php esc_html_e( 'Enterprise', 'engintenia-theme' ); ?></h3>
-				<p class="price"><?php esc_html_e( 'Custom', 'engintenia-theme' ); ?></p>
-				<ul>
-					<li><?php esc_html_e( 'Multi-team management', 'engintenia-theme' ); ?></li>
-					<li><?php esc_html_e( 'Dedicated account support', 'engintenia-theme' ); ?></li>
-					<li><?php esc_html_e( 'Custom workflow integrations', 'engintenia-theme' ); ?></li>
-				</ul>
+			<article class="card step-card reveal-up">
+				<div class="step-icon" aria-hidden="true">🚀</div>
+				<h3><?php esc_html_e( 'Hire and manage', 'engintenia-theme' ); ?></h3>
+				<p><?php esc_html_e( 'Award the project and track delivery through your dashboard.', 'engintenia-theme' ); ?></p>
 			</article>
 		</div>
 	</div>
 </section>
 
-<section class="section-block">
+<section class="section-block testimonials-wrap">
 	<div class="container">
-		<div class="section-heading">
+		<div class="section-heading reveal-up">
 			<p class="eyebrow"><?php esc_html_e( 'TESTIMONIALS', 'engintenia-theme' ); ?></p>
-			<h2><?php esc_html_e( 'Trusted by engineering teams across the region', 'engintenia-theme' ); ?></h2>
+			<h2><?php esc_html_e( 'What clients say about Engintenia', 'engintenia-theme' ); ?></h2>
 		</div>
-		<div class="feature-grid testimonial-grid">
-			<article class="card testimonial-card">
-				<p><?php esc_html_e( '“Engintenia helped us reduce subcontractor hiring time by over 60% in our latest tower project.”', 'engintenia-theme' ); ?></p>
-				<strong><?php esc_html_e( 'Operations Manager, GulfBuild Co.', 'engintenia-theme' ); ?></strong>
+		<div class="testimonials-slider reveal-up" data-slider>
+			<article class="card testimonial-card is-active">
+				<p><?php esc_html_e( 'Engintenia helped us close contractor hiring in 5 days instead of 3 weeks. The quality of specialists was exceptional.', 'engintenia-theme' ); ?></p>
+				<strong><?php esc_html_e( 'Operations Director, Nexa Infra', 'engintenia-theme' ); ?></strong>
 			</article>
 			<article class="card testimonial-card">
-				<p><?php esc_html_e( '“A clean marketplace with serious contractors. Our tender process is now much faster.”', 'engintenia-theme' ); ?></p>
-				<strong><?php esc_html_e( 'Procurement Lead, Atlas MEP', 'engintenia-theme' ); ?></strong>
+				<p><?php esc_html_e( 'We sourced certified CCTV and security teams for multiple branches through one streamlined platform.', 'engintenia-theme' ); ?></p>
+				<strong><?php esc_html_e( 'Procurement Lead, Sentinel Group', 'engintenia-theme' ); ?></strong>
 			</article>
 			<article class="card testimonial-card">
-				<p><?php esc_html_e( '“The subscription model is straightforward and we consistently receive qualified leads.”', 'engintenia-theme' ); ?></p>
-				<strong><?php esc_html_e( 'Founder, Prime Electromech', 'engintenia-theme' ); ?></strong>
+				<p><?php esc_html_e( 'The interface feels premium and our PM team can monitor every job from one central workspace.', 'engintenia-theme' ); ?></p>
+				<strong><?php esc_html_e( 'Project Manager, Voltaxis Energy', 'engintenia-theme' ); ?></strong>
 			</article>
-		</div>
-	</div>
-</section>
-
-<section class="section-block">
-	<div class="container cta-banner">
-		<div>
-			<p class="eyebrow"><?php esc_html_e( 'READY TO SCALE?', 'engintenia-theme' ); ?></p>
-			<h2><?php esc_html_e( 'Join Engintenia and start building better project teams today.', 'engintenia-theme' ); ?></h2>
-		</div>
-		<div class="hero-actions">
-			<a class="btn btn-primary" href="<?php echo esc_url( home_url( '/register' ) ); ?>"><?php esc_html_e( 'Create Account', 'engintenia-theme' ); ?></a>
 		</div>
 	</div>
 </section>
