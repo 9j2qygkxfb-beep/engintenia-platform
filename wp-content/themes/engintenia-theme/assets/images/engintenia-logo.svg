@@ -1,0 +1,26 @@
+<svg width="320" height="72" viewBox="0 0 320 72" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="enginteniaLogoTitle enginteniaLogoDesc">
+  <title id="enginteniaLogoTitle">Engintenia Logo</title>
+  <desc id="enginteniaLogoDesc">Modern engineering logo with crane, building and gear motif.</desc>
+  <defs>
+    <linearGradient id="engBlue" x1="6" y1="6" x2="66" y2="66" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16A5FF"/>
+      <stop offset="1" stop-color="#1F4EFF"/>
+    </linearGradient>
+    <linearGradient id="engSteel" x1="14" y1="8" x2="56" y2="59" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#112957"/>
+      <stop offset="1" stop-color="#0A1738"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="6" width="62" height="62" rx="16" fill="url(#engSteel)"/>
+  <path d="M19 52V27.6H25.4V52H19ZM29.4 52V20.4H35.8V52H29.4ZM39.8 52V33H46.2V52H39.8Z" fill="url(#engBlue)"/>
+  <path d="M17 19H54" stroke="#8FD8FF" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M48 19L43 14" stroke="#8FD8FF" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="49" cy="49" r="8" stroke="#8FD8FF" stroke-width="2.4"/>
+  <path d="M49 38V31" stroke="#8FD8FF" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M57.1 42.6L61.8 39.6" stroke="#8FD8FF" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M57.4 55.1L62.4 57.9" stroke="#8FD8FF" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M49 60V67" stroke="#8FD8FF" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M40.7 55.2L35.8 58" stroke="#8FD8FF" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M40.8 42.8L35.8 40" stroke="#8FD8FF" stroke-width="2.4" stroke-linecap="round"/>
+  <text x="82" y="45" fill="#EEF4FF" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="0.6">ENGINTENIA</text>
+</svg>

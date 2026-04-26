@@ -22,7 +22,7 @@ $featured_projects_query = new WP_Query(
 $featured_contractors = get_users(
 	array(
 		'role'    => 'eng_subcontractor',
-		'number'  => 4,
+		'number'  => 6,
 		'orderby' => 'registered',
 		'order'   => 'DESC',
 	)
@@ -59,19 +59,19 @@ $categories = array(
 	<div class="hero-overlay" aria-hidden="true"></div>
 	<div class="container hero-grid">
 		<div class="hero-copy reveal-up">
-			<p class="eyebrow"><?php esc_html_e( 'ENGINTENIA MARKETPLACE', 'engintenia-theme' ); ?></p>
-			<h1><?php esc_html_e( 'Hire top engineering contractors', 'engintenia-theme' ); ?></h1>
-			<p class="hero-subtitle"><?php esc_html_e( 'Connect with vetted professionals for CCTV, networking, security, solar, and complex engineering delivery.', 'engintenia-theme' ); ?></p>
+			<p class="eyebrow"><?php esc_html_e( 'PREMIUM ENGINEERING MARKETPLACE', 'engintenia-theme' ); ?></p>
+			<h1><?php esc_html_e( 'Hire Elite Engineering Contractors', 'engintenia-theme' ); ?></h1>
+			<p class="hero-subtitle"><?php esc_html_e( 'Scale from one site to nationwide delivery with verified contractors, transparent milestones, and enterprise-ready project governance.', 'engintenia-theme' ); ?></p>
 			<div class="hero-actions">
 				<a class="btn btn-primary" href="<?php echo esc_url( home_url( '/register' ) ); ?>"><?php esc_html_e( 'Get Started', 'engintenia-theme' ); ?></a>
 				<a class="btn btn-outline" href="<?php echo esc_url( home_url( '/register' ) ); ?>"><?php esc_html_e( 'Become Contractor', 'engintenia-theme' ); ?></a>
 			</div>
 		</div>
 		<div class="hero-card reveal-up">
-			<h3><?php esc_html_e( 'Search projects and services', 'engintenia-theme' ); ?></h3>
+			<h3><?php esc_html_e( 'Search premium projects and specialists', 'engintenia-theme' ); ?></h3>
 			<form class="project-search-form" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<label class="screen-reader-text" for="eng-search"><?php esc_html_e( 'Search projects', 'engintenia-theme' ); ?></label>
-				<input id="eng-search" type="search" name="s" placeholder="<?php esc_attr_e( 'Try: Solar maintenance in Houston', 'engintenia-theme' ); ?>" required>
+				<input id="eng-search" type="search" name="s" placeholder="<?php esc_attr_e( 'Try: Industrial security installation in Dallas', 'engintenia-theme' ); ?>" required>
 				<input type="hidden" name="post_type" value="eng_project">
 				<button type="submit" class="btn btn-primary"><?php esc_html_e( 'Search Projects', 'engintenia-theme' ); ?></button>
 			</form>
@@ -101,7 +101,7 @@ $categories = array(
 		<div class="section-heading heading-row reveal-up">
 			<div>
 				<p class="eyebrow"><?php esc_html_e( 'FEATURED PROJECTS', 'engintenia-theme' ); ?></p>
-				<h2><?php esc_html_e( 'Latest opportunities from Engintenia companies', 'engintenia-theme' ); ?></h2>
+				<h2><?php esc_html_e( 'Latest opportunities from leading Engintenia companies', 'engintenia-theme' ); ?></h2>
 			</div>
 			<a class="btn btn-outline" href="<?php echo esc_url( home_url( '/projects' ) ); ?>"><?php esc_html_e( 'View All Projects', 'engintenia-theme' ); ?></a>
 		</div>
@@ -138,7 +138,7 @@ $categories = array(
 	<div class="container">
 		<div class="section-heading reveal-up">
 			<p class="eyebrow"><?php esc_html_e( 'TOP CONTRACTORS', 'engintenia-theme' ); ?></p>
-			<h2><?php esc_html_e( 'Top-rated specialists ready for deployment', 'engintenia-theme' ); ?></h2>
+			<h2><?php esc_html_e( 'Top-rated specialists ready for enterprise deployment', 'engintenia-theme' ); ?></h2>
 		</div>
 		<div class="feature-grid contractor-grid">
 			<?php if ( ! empty( $featured_contractors ) ) : ?>
@@ -177,17 +177,17 @@ $categories = array(
 			<article class="card step-card reveal-up">
 				<div class="step-icon" aria-hidden="true">📝</div>
 				<h3><?php esc_html_e( 'Post project brief', 'engintenia-theme' ); ?></h3>
-				<p><?php esc_html_e( 'Share scope, timeline, and preferred budget in minutes.', 'engintenia-theme' ); ?></p>
+				<p><?php esc_html_e( 'Define scope, timeline, compliance and commercial targets in minutes.', 'engintenia-theme' ); ?></p>
 			</article>
 			<article class="card step-card reveal-up">
 				<div class="step-icon" aria-hidden="true">🤝</div>
-				<h3><?php esc_html_e( 'Compare top bids', 'engintenia-theme' ); ?></h3>
-				<p><?php esc_html_e( 'Review proposals, ratings, and experience side by side.', 'engintenia-theme' ); ?></p>
+				<h3><?php esc_html_e( 'Compare qualified bids', 'engintenia-theme' ); ?></h3>
+				<p><?php esc_html_e( 'Review proposals, ratings, certifications and historical delivery performance.', 'engintenia-theme' ); ?></p>
 			</article>
 			<article class="card step-card reveal-up">
 				<div class="step-icon" aria-hidden="true">🚀</div>
-				<h3><?php esc_html_e( 'Hire and manage', 'engintenia-theme' ); ?></h3>
-				<p><?php esc_html_e( 'Award the project and track delivery through your dashboard.', 'engintenia-theme' ); ?></p>
+				<h3><?php esc_html_e( 'Hire and monitor delivery', 'engintenia-theme' ); ?></h3>
+				<p><?php esc_html_e( 'Award the project and track milestones with centralized enterprise visibility.', 'engintenia-theme' ); ?></p>
 			</article>
 		</div>
 	</div>
@@ -197,7 +197,7 @@ $categories = array(
 	<div class="container">
 		<div class="section-heading reveal-up">
 			<p class="eyebrow"><?php esc_html_e( 'TESTIMONIALS', 'engintenia-theme' ); ?></p>
-			<h2><?php esc_html_e( 'What clients say about Engintenia', 'engintenia-theme' ); ?></h2>
+			<h2><?php esc_html_e( 'What enterprise teams say about Engintenia', 'engintenia-theme' ); ?></h2>
 		</div>
 		<div class="testimonials-slider reveal-up" data-slider>
 			<article class="card testimonial-card is-active">
@@ -213,6 +213,27 @@ $categories = array(
 				<strong><?php esc_html_e( 'Project Manager, Voltaxis Energy', 'engintenia-theme' ); ?></strong>
 			</article>
 		</div>
+	</div>
+</section>
+
+<section class="section-block">
+	<div class="container stats-grid">
+		<article class="card stat-card reveal-up">
+			<h3>12K+</h3>
+			<p><?php esc_html_e( 'Projects published', 'engintenia-theme' ); ?></p>
+		</article>
+		<article class="card stat-card reveal-up">
+			<h3>8.5K+</h3>
+			<p><?php esc_html_e( 'Verified contractors', 'engintenia-theme' ); ?></p>
+		</article>
+		<article class="card stat-card reveal-up">
+			<h3>98%</h3>
+			<p><?php esc_html_e( 'Successful completion rate', 'engintenia-theme' ); ?></p>
+		</article>
+		<article class="card stat-card reveal-up">
+			<h3>34</h3>
+			<p><?php esc_html_e( 'Countries served', 'engintenia-theme' ); ?></p>
+		</article>
 	</div>
 </section>
 <?php
