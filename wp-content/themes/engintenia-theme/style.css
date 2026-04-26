@@ -1,0 +1,115 @@
+/*
+Theme Name: Engintenia Theme
+Theme URI: https://engintenia.com/
+Author: Engintenia
+Author URI: https://engintenia.com/
+Description: Custom WordPress theme for the Engintenia marketplace platform.
+Version: 1.0.0
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: engintenia-theme
+Tags: custom-theme, marketplace, responsive, two-columns
+*/
+
+:root {
+  --eng-bg: #0c1222;
+  --eng-surface: #111a30;
+  --eng-card: #16213d;
+  --eng-primary: #2d7fff;
+  --eng-primary-dark: #1d5dd0;
+  --eng-text: #eef2ff;
+  --eng-muted: #afbad6;
+  --eng-border: #26365f;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--eng-bg);
+  color: var(--eng-text);
+  line-height: 1.6;
+}
+
+a { color: var(--eng-primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container {
+  width: min(1120px, 92%);
+  margin: 0 auto;
+}
+
+.site-header {
+  background: rgba(12, 18, 34, 0.9);
+  border-bottom: 1px solid var(--eng-border);
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(6px);
+  z-index: 20;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 0;
+}
+
+.brand {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hero {
+  padding: 5rem 0 3rem;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+}
+
+.hero p {
+  color: var(--eng-muted);
+  max-width: 60ch;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0 4rem;
+}
+
+.card {
+  border: 1px solid var(--eng-border);
+  background: linear-gradient(170deg, var(--eng-card), var(--eng-surface));
+  border-radius: 14px;
+  padding: 1.1rem;
+}
+
+.card h3 { margin-top: 0; }
+.card p { color: var(--eng-muted); }
+
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  background: var(--eng-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background: var(--eng-primary-dark);
+  text-decoration: none;
+}
+
+.site-footer {
+  border-top: 1px solid var(--eng-border);
+  padding: 1.5rem 0;
+  color: var(--eng-muted);
+  font-size: 0.95rem;
+}

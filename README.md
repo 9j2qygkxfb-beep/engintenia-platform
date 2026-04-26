@@ -1,6 +1,9 @@
-# Engintenia WordPress Platform Plugin
+# Engintenia WordPress Platform (Plugin + Theme)
 
-This repository now contains a complete custom WordPress plugin for **Engintenia**, a marketplace connecting companies and subcontractors globally.
+This repository now includes:
+
+- A custom WordPress plugin for marketplace features.
+- A native WordPress theme (not static HTML) for frontend presentation.
 
 ## Plugin location
 
@@ -8,28 +11,34 @@ This repository now contains a complete custom WordPress plugin for **Engintenia
 wp-content/plugins/engintenia-platform/
 ```
 
-## File structure
+## Theme location
 
 ```text
-wp-content/plugins/engintenia-platform/
-├─ engintenia-platform.php
-├─ assets/
-│  └─ css/
-│     └─ style.css
-├─ includes/
-│  ├─ class-engintenia-plugin.php
-│  ├─ class-engintenia-roles.php
-│  ├─ class-engintenia-post-types.php
-│  ├─ class-engintenia-subscriptions.php
-│  ├─ class-engintenia-proposals.php
-│  ├─ class-engintenia-notifications.php
-│  ├─ class-engintenia-dashboard.php
-│  ├─ class-engintenia-rest.php
-│  └─ class-engintenia-shortcodes.php
-└─ languages/
+wp-content/themes/engintenia-theme/
 ```
 
-## Included features
+## Theme files included
+
+```text
+wp-content/themes/engintenia-theme/
+├─ style.css
+├─ functions.php
+├─ header.php
+├─ footer.php
+├─ front-page.php
+└─ index.php
+```
+
+## What the WordPress theme provides
+
+- Proper WordPress theme header metadata in `style.css`.
+- Standard template hierarchy entry points (`front-page.php`, `index.php`).
+- Global reusable layout with `header.php` and `footer.php`.
+- Menu registration (`Primary Menu`) and style enqueue in `functions.php`.
+- Responsive starter styles for the marketplace landing UI.
+- Compatibility with Engintenia plugin shortcodes on pages.
+
+## Included plugin features
 
 - User roles: **Company**, **Subcontractor**, **Admin**.
 - Authentication-ready registration form via shortcode.
@@ -61,9 +70,8 @@ wp-content/plugins/engintenia-platform/
 - REST API endpoints:
   - `GET /wp-json/engintenia/v1/projects`
   - `GET /wp-json/engintenia/v1/notifications`
-- Modern, clean, mobile-responsive starter UI CSS.
 
-## Shortcodes
+## Shortcodes (from plugin)
 
 Use these shortcodes on pages:
 
@@ -74,29 +82,23 @@ Use these shortcodes on pages:
 - `[eng_company_dashboard]`
 - `[eng_subcontractor_dashboard]`
 
-## Bluehost installation instructions
+## Installation on Bluehost
 
-1. Log in to Bluehost cPanel / WordPress Admin.
-2. In File Manager (or FTP), upload folder:
+1. Upload plugin folder to:
    - `wp-content/plugins/engintenia-platform`
-3. Go to WordPress Admin → **Plugins**.
-4. Activate **Engintenia Platform**.
-5. Go to **Settings → Permalinks** and click **Save** once (refresh rewrite rules).
-6. Create pages and place shortcodes:
-   - Register page: `[eng_register_form]`
-   - Projects page: `[eng_projects_list]`
-   - Company Dashboard: `[eng_company_dashboard]`
-   - Subcontractor Dashboard: `[eng_subcontractor_dashboard]`
-7. Ensure media uploads are enabled (for receipt/quotation uploads).
-8. Configure outgoing email in Bluehost (SMTP recommended plugin) so notifications are delivered reliably.
-9. Admin approvals:
-   - Use **Eng Subscriptions** in wp-admin to approve/reject transfer receipts.
+2. Upload theme folder to:
+   - `wp-content/themes/engintenia-theme`
+3. In WordPress Admin:
+   - Activate plugin: **Engintenia Platform**
+   - Activate theme: **Engintenia Theme**
+4. Go to **Settings → Permalinks** and click **Save** once.
+5. Create pages and place plugin shortcodes where needed.
+6. Create/assign menu in **Appearance → Menus** to **Primary Menu**.
+7. Configure SMTP for reliable notification emails.
 
-## Recommended production hardening
+## Recommended next steps
 
-- Add CAPTCHA and email verification on registration.
-- Add explicit login/reset-password templates.
-- Add saved-projects persistence as user meta or custom table.
-- Add stronger validation/rate limiting for forms.
-- Use WPML/Polylang + translation files in `languages/` for full multilingual UI.
-- Add payment reconciliation workflow and receipts audit logs.
+- Add custom page templates for dashboard and project archive views.
+- Add full translation files under `languages/`.
+- Add child theme strategy for safe customization.
+- Add CAPTCHA + stronger validation on all public forms.
