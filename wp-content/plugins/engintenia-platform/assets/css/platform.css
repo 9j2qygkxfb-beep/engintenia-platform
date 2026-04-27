@@ -1,0 +1,6 @@
+.eng-card{background:rgba(13,25,48,.7);backdrop-filter:blur(12px);border:1px solid rgba(118,183,255,.22);border-radius:14px;padding:20px;margin:16px 0;color:#ecf4ff}
+.eng-grid{display:grid;gap:16px}.eng-grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}.eng-grid-4{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.eng-btn{display:inline-block;background:linear-gradient(120deg,#2f6dff,#47c1ff);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;border:none;cursor:pointer}
+.eng-btn-ghost{background:transparent;border:1px solid #3f7bff}.eng-btn-sm{padding:6px 10px;font-size:12px}
+.eng-form input,.eng-form textarea,.eng-form select{width:100%;padding:10px;border-radius:8px;border:1px solid #355082;background:#0b1322;color:#fff;margin-bottom:10px}
+.eng-project .eng-meta{display:flex;flex-wrap:wrap;gap:12px;list-style:none;padding:0}.eng-lock{color:#ffce8a}
