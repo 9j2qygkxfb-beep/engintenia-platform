@@ -26,7 +26,9 @@ wp-content/themes/engintenia-theme/
 ├─ header.php
 ├─ footer.php
 ├─ front-page.php
-└─ index.php
+├─ index.php
+├─ page-projects.php
+└─ page-contractors.php
 ```
 
 ## What the WordPress theme provides
@@ -37,6 +39,8 @@ wp-content/themes/engintenia-theme/
 - Menu registration (`Primary Menu`) and style enqueue in `functions.php`.
 - Responsive starter styles for the marketplace landing UI.
 - Compatibility with Engintenia plugin shortcodes on pages.
+- Custom page templates for plugin-driven directories (`Projects Directory`, `Contractors Directory`).
+- Front page now renders editable WordPress page content (Gutenberg/Classic editor) instead of hard-coded-only sections.
 
 ## Included plugin features
 

@@ -600,3 +600,35 @@ h3 {
     flex: 1;
   }
 }
+
+.intro-content {
+  padding-top: 2.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.intro-content .wp-block-group,
+.page-content-card {
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.page-content-card > :first-child {
+  margin-top: 0;
+}
+
+.eng-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.eng-card {
+  border: 1px solid var(--eng-border);
+  border-radius: var(--eng-radius-sm);
+  background: var(--eng-card-strong);
+  padding: 1rem;
+}
+
+.eng-muted {
+  color: var(--eng-muted);
+}
