@@ -4,8 +4,12 @@
     <form method="get" class="eng-grid eng-grid-4">
         <select name="country">
             <option value=""><?php esc_html_e('All Countries', 'engintenia-platform'); ?></option>
-            <?php foreach ($countries as $item) : ?>
-                <option value="<?php echo esc_attr($item); ?>" <?php selected($country, $item); ?>><?php echo esc_html($item); ?></option>
+            <?php foreach ($country_groups as $group_label => $countries) : ?>
+                <optgroup label="<?php echo esc_attr($group_label); ?>">
+                    <?php foreach ($countries as $item) : ?>
+                        <option value="<?php echo esc_attr($item); ?>" <?php selected($country, $item); ?>><?php echo esc_html($item); ?></option>
+                    <?php endforeach; ?>
+                </optgroup>
             <?php endforeach; ?>
         </select>
         <input type="text" name="budget" value="<?php echo esc_attr($budget); ?>" placeholder="<?php esc_attr_e('Budget', 'engintenia-platform'); ?>">
@@ -25,7 +29,6 @@
         <p><?php echo esc_html(wp_trim_words($project->post_content, 35)); ?></p>
         <ul class="eng-meta">
             <li><strong><?php esc_html_e('Budget', 'engintenia-platform'); ?>:</strong> <?php echo esc_html(get_post_meta($project->ID, 'eng_budget', true)); ?></li>
-            <li><strong><?php esc_html_e('Duration', 'engintenia-platform'); ?>:</strong> <?php echo esc_html(get_post_meta($project->ID, 'eng_duration', true)); ?></li>
             <li><strong><?php esc_html_e('Location', 'engintenia-platform'); ?>:</strong> <?php echo esc_html(get_post_meta($project->ID, 'eng_country', true)); ?></li>
         </ul>
 
@@ -42,7 +45,7 @@
                     <input type="hidden" name="eng_action" value="submit_proposal">
                     <input type="hidden" name="project_id" value="<?php echo esc_attr((string) $project->ID); ?>">
                     <textarea name="proposal_message" required placeholder="<?php esc_attr_e('Proposal message', 'engintenia-platform'); ?>"></textarea>
-                    <input type="text" name="proposal_quote" required placeholder="<?php esc_attr_e('Your quotation', 'engintenia-platform'); ?>">
+                    <input type="text" name="proposal_quote" required placeholder="<?php esc_attr_e('Your price offer', 'engintenia-platform'); ?>">
                     <button class="eng-btn" type="submit"><?php esc_html_e('Submit Proposal', 'engintenia-platform'); ?></button>
                 </form>
             <?php else : ?>

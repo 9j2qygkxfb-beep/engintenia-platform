@@ -20,6 +20,7 @@
             <li>
                 <?php echo esc_html($proposal->post_title); ?>
                 (<?php echo esc_html(get_post_meta($proposal->ID, 'eng_quote', true)); ?>)
+                - <?php echo esc_html($proposal->post_content); ?>
                 <form method="post" style="display:inline">
                     <?php wp_nonce_field('eng_send_message'); ?>
                     <input type="hidden" name="eng_action" value="submit_message">
@@ -27,6 +28,19 @@
                     <input type="text" name="message" placeholder="<?php esc_attr_e('Send acceptance message', 'engintenia-platform'); ?>">
                     <button class="eng-btn eng-btn-sm" type="submit"><?php esc_html_e('Accept Contractor', 'engintenia-platform'); ?></button>
                 </form>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+
+<div class="eng-card">
+    <h3><?php esc_html_e('Messages', 'engintenia-platform'); ?></h3>
+    <ul>
+        <?php foreach ($messages as $message) : ?>
+            <?php $sender = get_userdata((int) $message->post_author); ?>
+            <li>
+                <strong><?php echo esc_html($sender ? $sender->display_name : __('Unknown sender', 'engintenia-platform')); ?>:</strong>
+                <?php echo esc_html($message->post_content); ?>
             </li>
         <?php endforeach; ?>
     </ul>
