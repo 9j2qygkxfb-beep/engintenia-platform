@@ -49,3 +49,45 @@ function engintenia_theme_assets() {
 		true
 	);
 }
+
+
+/**
+ * Get a page URL by slug with a fallback URL.
+ *
+ * @param string $slug Page slug.
+ * @param string $fallback_url Fallback URL.
+ * @return string
+ */
+function engintenia_theme_get_page_url_or_fallback( $slug, $fallback_url ) {
+	$page = get_page_by_path( sanitize_title( $slug ) );
+
+	if ( $page instanceof WP_Post ) {
+		return get_permalink( $page->ID );
+	}
+
+	return $fallback_url;
+}
+
+add_filter( 'get_search_form', 'engintenia_theme_filter_search_form' );
+/**
+ * Use project-first defaults in the global search form.
+ *
+ * @param string $form Search form markup.
+ * @return string
+ */
+function engintenia_theme_filter_search_form( $form ) {
+	$search_action = esc_url( home_url( '/' ) );
+	$query_value   = get_search_query();
+
+	ob_start();
+	?>
+	<form role="search" method="get" class="project-search-form" action="<?php echo $search_action; ?>">
+		<label class="screen-reader-text" for="eng-search"><?php esc_html_e( 'Search projects', 'engintenia-theme' ); ?></label>
+		<input id="eng-search" type="search" name="s" value="<?php echo esc_attr( $query_value ); ?>" placeholder="<?php esc_attr_e( 'Try: Industrial security installation in Dallas', 'engintenia-theme' ); ?>" required>
+		<input type="hidden" name="post_type" value="eng_project">
+		<button type="submit" class="btn btn-primary"><?php esc_html_e( 'Search Projects', 'engintenia-theme' ); ?></button>
+	</form>
+	<?php
+
+	return ob_get_clean();
+}
