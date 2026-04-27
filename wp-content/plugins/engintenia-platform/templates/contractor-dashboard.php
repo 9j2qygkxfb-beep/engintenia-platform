@@ -21,3 +21,16 @@
         <?php endforeach; ?>
     </ul>
 </div>
+
+<div class="eng-card">
+    <h3><?php esc_html_e('Messages', 'engintenia-platform'); ?></h3>
+    <ul>
+        <?php foreach ($messages as $message) : ?>
+            <?php $sender = get_userdata((int) $message->post_author); ?>
+            <li>
+                <strong><?php echo esc_html($sender ? $sender->display_name : __('Unknown sender', 'engintenia-platform')); ?>:</strong>
+                <?php echo esc_html($message->post_content); ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>

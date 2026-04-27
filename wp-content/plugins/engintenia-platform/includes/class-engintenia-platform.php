@@ -211,10 +211,12 @@ class Engintenia_Platform
 
         if ($project_id && ! is_wp_error($project_id)) {
             update_post_meta($project_id, 'eng_budget', sanitize_text_field(wp_unslash($_POST['project_budget'] ?? '')));
-            update_post_meta($project_id, 'eng_duration', sanitize_text_field(wp_unslash($_POST['project_duration'] ?? '')));
             update_post_meta($project_id, 'eng_country', sanitize_text_field(wp_unslash($_POST['project_country'] ?? '')));
             update_post_meta($project_id, 'eng_client_contact', sanitize_text_field(wp_unslash($_POST['project_contact'] ?? '')));
-            wp_set_object_terms($project_id, array_map('intval', $_POST['project_category'] ?? []), 'eng_category');
+            $category_id = isset($_POST['project_category']) ? (int) $_POST['project_category'] : 0;
+            if ($category_id > 0) {
+                wp_set_object_terms($project_id, [$category_id], 'eng_category');
+            }
             $this->redirect_back(['eng_success' => 'project_created']);
         }
 
@@ -292,7 +294,7 @@ class Engintenia_Platform
     private function handle_message_submission()
     {
         check_admin_referer('eng_send_message');
-        if (! $this->is_subscribed(get_current_user_id())) {
+        if (! $this->is_subscribed(get_current_user_id()) && ! in_array('eng_client', (array) wp_get_current_user()->roles, true)) {
             $this->redirect_back(['eng_error' => 'subscription_required']);
         }
 
@@ -438,7 +440,7 @@ class Engintenia_Platform
             'tax_query' => $tax_query,
         ]);
 
-        $countries = $this->get_countries();
+        $country_groups = $this->get_country_groups();
         $categories = get_terms(['taxonomy' => 'eng_category', 'hide_empty' => false]);
 
         ob_start();
@@ -452,7 +454,7 @@ class Engintenia_Platform
             return '<p>' . esc_html__('Only clients can post projects.', 'engintenia-platform') . '</p>';
         }
 
-        $countries = $this->get_countries();
+        $country_groups = $this->get_country_groups();
         $categories = get_terms(['taxonomy' => 'eng_category', 'hide_empty' => false]);
 
         ob_start();
@@ -500,6 +502,8 @@ class Engintenia_Platform
             ]);
         }
 
+        $messages = $this->get_user_messages(get_current_user_id());
+
         ob_start();
         include ENGINTENIA_PLATFORM_PATH . 'templates/company-dashboard.php';
         return (string) ob_get_clean();
@@ -522,6 +526,8 @@ class Engintenia_Platform
         if (! is_array($notifications)) {
             $notifications = [];
         }
+
+        $messages = $this->get_user_messages(get_current_user_id());
 
         ob_start();
         include ENGINTENIA_PLATFORM_PATH . 'templates/contractor-dashboard.php';
@@ -635,13 +641,54 @@ class Engintenia_Platform
         ]);
     }
 
-    private function get_countries()
+    private function get_user_messages($user_id)
+    {
+        return get_posts([
+            'post_type' => 'eng_message',
+            'posts_per_page' => 30,
+            'meta_key' => 'eng_receiver_id',
+            'meta_value' => $user_id,
+            'orderby' => 'date',
+            'order' => 'DESC',
+        ]);
+    }
+
+    private function get_country_groups()
     {
         return [
-            'United Arab Emirates', 'Saudi Arabia', 'Qatar', 'Kuwait', 'Bahrain', 'Oman', 'Jordan', 'Egypt',
-            'Germany', 'France', 'Italy', 'Spain', 'Netherlands', 'Belgium', 'Sweden', 'Norway',
-            'United States', 'Canada',
-            'Nigeria', 'South Africa', 'Kenya', 'Morocco', 'Ghana', 'Algeria',
+            __('Arab Countries', 'engintenia-platform') => [
+                'United Arab Emirates',
+                'Saudi Arabia',
+                'Qatar',
+                'Kuwait',
+                'Bahrain',
+                'Oman',
+                'Jordan',
+                'Egypt',
+                'Morocco',
+                'Algeria',
+            ],
+            __('Europe', 'engintenia-platform') => [
+                'Germany',
+                'France',
+                'Italy',
+                'Spain',
+                'Netherlands',
+                'Belgium',
+                'Sweden',
+                'Norway',
+            ],
+            __('USA', 'engintenia-platform') => [
+                'United States',
+            ],
+            __('Africa', 'engintenia-platform') => [
+                'Nigeria',
+                'South Africa',
+                'Kenya',
+                'Ghana',
+                'Ethiopia',
+                'Tunisia',
+            ],
         ];
     }
 }
