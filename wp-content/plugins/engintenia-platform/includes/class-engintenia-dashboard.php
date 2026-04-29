@@ -33,8 +33,11 @@ class Engintenia_Dashboard {
 	}
 
 	public static function proposal_form( $project_id ) {
-		if ( ! is_user_logged_in() || ! in_array( 'eng_subcontractor', (array) wp_get_current_user()->roles, true ) || ! Engintenia_Subscriptions::has_active_subscription( get_current_user_id() ) ) {
+		if ( ! is_user_logged_in() || ! in_array( 'eng_subcontractor', (array) wp_get_current_user()->roles, true ) ) {
 			return '';
+		}
+		if ( ! Engintenia_Subscriptions::has_active_subscription( get_current_user_id() ) ) {
+			return '<p><strong>' . esc_html__( 'Submit Proposal is available only for active subscribers.', 'engintenia-platform' ) . '</strong></p>';
 		}
 		ob_start();
 		?>
@@ -71,7 +74,10 @@ class Engintenia_Dashboard {
 		}
 
 		wp_update_user( array( 'ID' => $user_id, 'role' => $role ) );
-		update_user_meta( $user_id, 'eng_country', sanitize_text_field( wp_unslash( $_POST['country'] ?? '' ) ) );
+		$allowed = Engintenia_Shortcodes::countries();
+		$country = sanitize_text_field( wp_unslash( $_POST['country'] ?? '' ) );
+		if ( ! in_array( $country, $allowed, true ) ) { $country = 'UAE'; }
+		update_user_meta( $user_id, 'eng_country', $country );
 		update_user_meta( $user_id, 'eng_city', sanitize_text_field( wp_unslash( $_POST['city'] ?? '' ) ) );
 		update_user_meta( $user_id, 'eng_specialization', sanitize_text_field( wp_unslash( $_POST['specialization'] ?? '' ) ) );
 		update_user_meta( $user_id, 'eng_phone', sanitize_text_field( wp_unslash( $_POST['phone'] ?? '' ) ) );
@@ -104,6 +110,7 @@ class Engintenia_Dashboard {
 			update_post_meta( $project_id, '_eng_budget', sanitize_text_field( wp_unslash( $_POST['budget'] ?? '' ) ) );
 			update_post_meta( $project_id, '_eng_country', sanitize_text_field( wp_unslash( $_POST['country'] ?? '' ) ) );
 			update_post_meta( $project_id, '_eng_city', sanitize_text_field( wp_unslash( $_POST['city'] ?? '' ) ) );
+			update_post_meta( $project_id, '_eng_duration', sanitize_text_field( wp_unslash( $_POST['duration'] ?? '' ) ) );
 			if ( ! empty( $_POST['category'] ) ) {
 				wp_set_object_terms( $project_id, sanitize_text_field( wp_unslash( $_POST['category'] ) ), 'eng_project_category' );
 			}
