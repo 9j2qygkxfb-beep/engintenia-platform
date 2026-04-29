@@ -67,7 +67,7 @@ class Engintenia_Post_Types {
 	}
 
 	public static function register_default_categories() {
-		$defaults = array( 'Construction', 'ELV', 'Fire Fighting', 'Electrical', 'Mechanical', 'HVAC' );
+		$defaults = array( 'CCTV Systems', 'Networking', 'Solar Installations', 'Security', 'Electrical Works', 'MEP Contracting' );
 		foreach ( $defaults as $term ) {
 			if ( ! term_exists( $term, 'eng_project_category' ) ) {
 				wp_insert_term( $term, 'eng_project_category' );
@@ -75,8 +75,36 @@ class Engintenia_Post_Types {
 		}
 	}
 
+	public static function seed_demo_projects() {
+		if ( (int) get_option( 'eng_demo_projects_seeded', 0 ) ) {
+			return;
+		}
+		$countries = Engintenia_Shortcodes::countries();
+		$categories = get_terms( array( 'taxonomy' => 'eng_project_category', 'hide_empty' => false ) );
+		for ( $i = 1; $i <= 100; $i++ ) {
+			$project_id = wp_insert_post(
+				array(
+					'post_type'    => 'eng_project',
+					'post_status'  => 'publish',
+					'post_title'   => sprintf( __( 'Demo Engineering Project %d', 'engintenia-platform' ), $i ),
+					'post_content' => __( 'Generated demo project for marketplace showcase.', 'engintenia-platform' ),
+				)
+			);
+			if ( $project_id ) {
+				update_post_meta( $project_id, '_eng_budget', '$' . wp_rand( 5000, 120000 ) );
+				update_post_meta( $project_id, '_eng_country', $countries[ array_rand( $countries ) ] );
+				update_post_meta( $project_id, '_eng_duration', wp_rand( 1, 12 ) . ' months' );
+				if ( ! empty( $categories ) ) {
+					wp_set_object_terms( $project_id, array( $categories[ array_rand( $categories ) ]->term_id ), 'eng_project_category' );
+				}
+			}
+		}
+		update_option( 'eng_demo_projects_seeded', 1 );
+	}
+
 	public static function activate() {
 		self::register();
+		self::seed_demo_projects();
 		flush_rewrite_rules();
 	}
 }
