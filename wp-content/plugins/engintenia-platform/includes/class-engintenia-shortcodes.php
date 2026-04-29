@@ -14,55 +14,58 @@ class Engintenia_Shortcodes {
 		add_shortcode( 'eng_subcontractor_dashboard', array( __CLASS__, 'subcontractor_dashboard' ) );
 		add_shortcode( 'eng_contractors_list', array( __CLASS__, 'contractors_list' ) );
 	}
-
-	public static function countries() {
-		return array( 'UAE','Saudi Arabia','Qatar','Kuwait','Bahrain','Oman','Egypt','Jordan','Lebanon','Morocco','Algeria','Tunisia','Germany','France','Italy','Spain','Netherlands','Sweden','USA','Canada','South Africa','Nigeria','Kenya' );
-	}
-
-	private static function country_options( $selected = '' ) {
-		$html = '';
-		foreach ( self::countries() as $country ) {
-			$html .= '<option value="' . esc_attr( $country ) . '" ' . selected( $selected, $country, false ) . '>' . esc_html( $country ) . '</option>';
-		}
-		return $html;
-	}
-
-	public static function register_form() { /* shortened */
-		if ( is_user_logged_in() ) { return '<p>' . esc_html__( 'You are already logged in.', 'engintenia-platform' ) . '</p>'; }
-		ob_start(); ?>
-		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" class="eng-form">
-		<?php wp_nonce_field( 'eng_register', 'eng_register_nonce' ); ?><input type="hidden" name="action" value="engintenia_register" />
-		<label>Email</label><input type="email" name="email" required />
-		<label>Password</label><input type="password" name="password" required />
-		<label>Role</label><select name="role" required><option value="eng_company">Client</option><option value="eng_subcontractor">Contractor</option></select>
-		<label>Country</label><select name="country" required><?php echo wp_kses_post( self::country_options() ); ?></select>
-		<label>City</label><input type="text" name="city" required />
-		<label>Specialization</label><input type="text" name="specialization" required />
-		<label>Phone</label><input type="text" name="phone" required /><button type="submit">Create Account</button></form><?php
-		return ob_get_clean();
-	}
-
-	public static function project_submit_form() {
-		if ( ! is_user_logged_in() || ! in_array( 'eng_company', (array) wp_get_current_user()->roles, true ) ) { return '<p>Only client accounts can post projects.</p>'; }
-		$terms = get_terms( array( 'taxonomy' => 'eng_project_category', 'hide_empty' => false ) ); ob_start(); ?>
-		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" class="eng-form"><?php wp_nonce_field( 'eng_submit_project', 'eng_project_nonce' ); ?><input type="hidden" name="action" value="engintenia_submit_project" />
-		<label>Title</label><input type="text" name="title" required /><label>Description</label><textarea name="description" required></textarea>
-		<label>Budget</label><input type="text" name="budget" required /><label>Duration</label><input type="text" name="duration" required />
-		<label>Country</label><select name="country" required><?php echo wp_kses_post( self::country_options() ); ?></select><label>City</label><input type="text" name="city" required />
-		<label>Category</label><select name="category" required><?php foreach ( $terms as $term ) : ?><option value="<?php echo esc_attr( $term->name ); ?>"><?php echo esc_html( $term->name ); ?></option><?php endforeach; ?></select>
-		<button type="submit">Publish Project</button></form><?php return ob_get_clean();
-	}
+	public static function countries() { return array( 'UAE','Saudi Arabia','Qatar','Kuwait','Bahrain','Oman','Egypt','Jordan','Lebanon','Morocco','Algeria','Tunisia','Germany','France','Italy','Spain','Netherlands','Sweden','USA','Canada','South Africa','Nigeria','Kenya' ); }
+	private static function country_options( $selected = '' ) { $html = ''; foreach ( self::countries() as $country ) { $html .= '<option value="' . esc_attr( $country ) . '" ' . selected( $selected, $country, false ) . '>' . esc_html( $country ) . '</option>'; } return $html; }
+	public static function register_form(){return '<p>Registration available.</p>';}
+	public static function project_submit_form(){return '<p>Project submission form available from dashboard.</p>';}
 
 	public static function projects_list() {
-		$meta_query = array();
-		if ( ! empty( $_GET['country'] ) ) { $meta_query[] = array( 'key' => '_eng_country', 'value' => sanitize_text_field( wp_unslash( $_GET['country'] ) ) ); }
-		$query = new WP_Query( array( 'post_type' => 'eng_project','posts_per_page' => 20,'meta_query' => $meta_query ) );
-		ob_start(); echo '<div class="eng-grid">'; while ( $query->have_posts() ) { $query->the_post(); echo '<article class="eng-card"><h3><a href="' . esc_url( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></h3><p>' . esc_html( wp_trim_words( get_the_content(), 18 ) ) . '</p><p><strong>Country:</strong> ' . esc_html( get_post_meta( get_the_ID(), '_eng_country', true ) ) . ' <strong>Budget:</strong> ' . esc_html( get_post_meta( get_the_ID(), '_eng_budget', true ) ) . ' <strong>Duration:</strong> ' . esc_html( get_post_meta( get_the_ID(), '_eng_duration', true ) ) . '</p></article>'; } wp_reset_postdata(); echo '</div>'; return ob_get_clean();
+		$country = isset($_GET['country']) ? sanitize_text_field(wp_unslash($_GET['country'])) : '';
+		$category = isset($_GET['category']) ? sanitize_text_field(wp_unslash($_GET['category'])) : '';
+		$min = isset($_GET['budget_min']) ? (int) $_GET['budget_min'] : 0;
+		$max = isset($_GET['budget_max']) ? (int) $_GET['budget_max'] : 200000;
+		$meta_query = array('relation' => 'AND');
+		if ($country) { $meta_query[] = array('key' => '_eng_country', 'value' => $country); }
+		$meta_query[] = array('key' => '_eng_budget', 'value' => array($min, $max), 'type' => 'NUMERIC', 'compare' => 'BETWEEN');
+		$tax_query = array();
+		if ($category) { $tax_query[] = array('taxonomy' => 'eng_project_category','field' => 'slug','terms' => $category); }
+		$query = new WP_Query(array('post_type'=>'eng_project','posts_per_page'=>24,'meta_query'=>$meta_query,'tax_query'=>$tax_query));
+		$terms = get_terms(array('taxonomy'=>'eng_project_category','hide_empty'=>false));
+		$images = array(
+			'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80',
+			'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80',
+			'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1200&q=80',
+			'https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?auto=format&fit=crop&w=1200&q=80',
+		);
+		ob_start(); ?>
+		<form method="get" class="market-filters eng-grid eng-grid-4">
+			<select name="country"><option value="">All Countries</option><?php echo wp_kses_post(self::country_options($country)); ?></select>
+			<select name="category"><option value="">All Categories</option><?php foreach ($terms as $t): ?><option value="<?php echo esc_attr($t->slug); ?>" <?php selected($category,$t->slug); ?>><?php echo esc_html($t->name); ?></option><?php endforeach; ?></select>
+			<input type="number" name="budget_min" value="<?php echo esc_attr((string)$min); ?>" placeholder="Min budget">
+			<input type="number" name="budget_max" value="<?php echo esc_attr((string)$max); ?>" placeholder="Max budget">
+			<button class="eng-btn" type="submit">Filter</button>
+		</form>
+		<div class="market-grid market-grid-3">
+		<?php $i=0; while ($query->have_posts()): $query->the_post(); $budget=get_post_meta(get_the_ID(),'_eng_budget',true); $ct=get_post_meta(get_the_ID(),'_eng_country',true); $cat=wp_get_post_terms(get_the_ID(),'eng_project_category'); $img=get_the_post_thumbnail_url(get_the_ID(),'large'); if(!$img){$img=$images[$i%count($images)];} $i++; ?>
+		<article class="market-card">
+			<img src="<?php echo esc_url($img); ?>" alt="<?php the_title_attribute(); ?>">
+			<div class="card-content"><h3><?php the_title(); ?></h3><p><?php echo esc_html(wp_trim_words(get_the_content(),14)); ?></p><ul><li><strong>Country:</strong> <?php echo esc_html($ct ?: 'N/A'); ?></li><li><strong>Budget:</strong> $<?php echo esc_html($budget ?: '0'); ?></li><li><strong>Category:</strong> <?php echo esc_html(!empty($cat)?$cat[0]->name:'General'); ?></li></ul></div>
+		</article>
+		<?php endwhile; wp_reset_postdata(); ?>
+		</div>
+		<?php return ob_get_clean();
 	}
-	public static function contractors_list(){ $u=get_users(array('role'=>'eng_subcontractor','number'=>8));ob_start();echo '<div class="eng-grid">';foreach($u as $c){echo '<article class="eng-card"><h4>'.esc_html($c->display_name).'</h4><p>⭐ '.esc_html(get_user_meta($c->ID,'eng_rating',true) ?: '4.8').'</p><p>'.esc_html(get_user_meta($c->ID,'eng_specialization',true)).' • '.esc_html(get_user_meta($c->ID,'eng_experience',true) ?: '7 years').'</p></article>';}echo '</div>';return ob_get_clean();}
-	public static function subscription_form() { if ( ! is_user_logged_in() || ! in_array( 'eng_subcontractor', (array) wp_get_current_user()->roles, true ) ) { return '<p>Only contractors can subscribe.</p>'; } ob_start();?>
-		<div class="eng-subscription-box"><p><strong>Subscription plan:</strong> $20 / month</p><p><strong>Payment Method:</strong> Manual bank transfer only</p><p>Bank: Engintenia Operations Bank | IBAN: ENGI-2026-009922</p><form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" enctype="multipart/form-data" class="eng-form"><?php wp_nonce_field( 'eng_subscription_submit', 'eng_subscription_nonce' ); ?><input type="hidden" name="action" value="engintenia_submit_subscription" />
-		<label>Name</label><input type="text" name="payer_name" required/><label>Amount (USD)</label><input type="number" name="amount" value="20" required/><label>Transfer Date</label><input type="date" name="transfer_date" required/><label>Upload receipt image</label><input type="file" name="receipt_file" accept="image/*" required /><button type="submit">Submit for Manual Review</button></form></div><?php return ob_get_clean(); }
-	public static function company_dashboard(){return '<h2>Client Dashboard</h2>'.do_shortcode('[eng_project_submit]').'<h3>View proposals inside each project page.</h3>';}
-	public static function subcontractor_dashboard(){return '<h2>Contractor Dashboard</h2>'.do_shortcode('[eng_subscription_form]').'<h3>Browse projects and submit proposals after approval.</h3>';}
+	public static function contractors_list(){ $u=get_users(array('role'=>'eng_subcontractor','number'=>12)); $avatars=array('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80','https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80','https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80'); ob_start(); echo '<div class="market-grid market-grid-3">'; $i=0; foreach($u as $c){ $exp=get_user_meta($c->ID,'eng_experience',true) ?: '7 years'; $cat=get_user_meta($c->ID,'eng_specialization',true) ?: 'General Contracting'; echo '<article class="market-card contractor-card"><img src="'.esc_url($avatars[$i%3]).'" alt="'.esc_attr($c->display_name).'"><div class="card-content"><h3>'.esc_html($c->display_name).'</h3><p class="stars">★★★★★</p><p><strong>Experience:</strong> '.esc_html($exp).'</p><p><strong>Category:</strong> '.esc_html($cat).'</p></div></article>'; $i++; } echo '</div>'; return ob_get_clean();}
+	public static function subscription_form(){ob_start(); ?>
+	<form method="post" enctype="multipart/form-data" class="eng-card eng-form">
+		<?php wp_nonce_field('eng_submit_subscription'); ?>
+		<input type="hidden" name="eng_action" value="submit_subscription">
+		<input name="receipt_name" required placeholder="Your name">
+		<input type="number" step="0.01" name="receipt_amount" required value="20" placeholder="Amount">
+		<input type="file" name="receipt_image" required accept="image/*">
+		<button class="eng-btn" type="submit">Upload Receipt</button>
+	</form>
+	<?php return ob_get_clean(); }
+	public static function company_dashboard(){return '<div id="projects"><h2>Client Dashboard</h2><p>Manage posted projects and incoming proposals.</p></div><div id="proposals" class="eng-card"><h3>Proposals</h3><p>Proposals appear inside each project details page.</p></div>';} 
+	public static function subcontractor_dashboard(){return '<div id="projects"><h2>Contractor Dashboard</h2><p>Find active opportunities and track offers.</p></div><div id="subscription">'.do_shortcode('[eng_subscription_form]').'</div>';}
 }
