@@ -1,7 +1,17 @@
 <?php if (! defined('ABSPATH')) { exit; } get_header(); ?>
-<section class="hero"><div class="container"><div class="glass"><h1><?php esc_html_e('Hire Elite Engineering Contractors','engintenia-theme'); ?></h1><p><?php esc_html_e('Engintenia is a premium engineering marketplace where clients post projects and subscribed contractors compete with verified proposals.','engintenia-theme'); ?></p><div class="cta-row"><a class="btn" href="<?php echo esc_url(home_url('/register')); ?>"><?php esc_html_e('Get Started','engintenia-theme'); ?></a><a class="btn alt" href="<?php echo esc_url(home_url('/subscription')); ?>"><?php esc_html_e('Become Contractor','engintenia-theme'); ?></a></div><form method="get" action="<?php echo esc_url(home_url('/projects')); ?>" class="search"><input type="text" name="s" placeholder="<?php esc_attr_e('Search projects or contractors','engintenia-theme'); ?>"><button class="btn" type="submit"><?php esc_html_e('Search','engintenia-theme'); ?></button></form></div></div></section>
-<section class="section"><div class="container"><h2>Categories</h2><div class="grid grid-3"><?php foreach (['CCTV Systems','Networking','Solar Installations','Security','Electrical Works','MEP Contracting'] as $category) : ?><div class="glass"><h3><?php echo esc_html($category); ?></h3></div><?php endforeach; ?></div></div></section>
-<section class="section"><div class="container"><h2>Latest Projects</h2><?php echo do_shortcode('[eng_projects_list]'); ?></div></section>
+<section class="hero">
+    <div class="container">
+        <div class="glass hero-card fade-in">
+            <p class="eyebrow"><?php esc_html_e('Engineering Marketplace', 'engintenia-theme'); ?></p>
+            <h1><?php esc_html_e('Hire Elite Engineering Contractors','engintenia-theme'); ?></h1>
+            <p><?php esc_html_e('Engintenia connects engineering companies with verified contractors for CCTV, MEP, electrical, solar, and security projects across global markets.','engintenia-theme'); ?></p>
+            <div class="cta-row"><a class="btn" href="<?php echo esc_url(home_url('/register')); ?>"><?php esc_html_e('Get Started','engintenia-theme'); ?></a><a class="btn alt" href="<?php echo esc_url(home_url('/subscription')); ?>"><?php esc_html_e('Become Contractor','engintenia-theme'); ?></a></div>
+            <form method="get" action="<?php echo esc_url(home_url('/projects')); ?>" class="search"><input type="text" name="s" placeholder="<?php esc_attr_e('Search projects or contractors','engintenia-theme'); ?>"><button class="btn" type="submit"><?php esc_html_e('Search','engintenia-theme'); ?></button></form>
+        </div>
+    </div>
+</section>
+<section class="section"><div class="container"><h2>Categories</h2><div class="grid grid-3"><?php foreach (['CCTV Systems','Networking','Solar Installations','Security','Electrical Works','MEP Contracting'] as $category) : ?><div class="glass category-card"><h3><?php echo esc_html($category); ?></h3></div><?php endforeach; ?></div></div></section>
+<section class="section"><div class="container"><div class="section-head"><h2>Latest Projects</h2><a class="btn alt" href="<?php echo esc_url(home_url('/projects')); ?>">Browse all</a></div><?php echo do_shortcode('[eng_projects_list]'); ?></div></section>
 <section class="section"><div class="container"><h2>Top Contractors</h2><?php echo do_shortcode('[eng_contractors_list]'); ?></div></section>
 <section class="section"><div class="container grid grid-3"><div class="glass"><h3>1</h3><p>Post project</p></div><div class="glass"><h3>2</h3><p>Receive proposals</p></div><div class="glass"><h3>3</h3><p>Select contractor</p></div></div></section>
 <section class="section"><div class="container stats"><div class="glass stat"><h3>1200+</h3><p>Projects</p></div><div class="glass stat"><h3>850+</h3><p>Contractors</p></div><div class="glass stat"><h3>94%</h3><p>Success</p></div></div></section>
