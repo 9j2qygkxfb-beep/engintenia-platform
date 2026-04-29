@@ -9,10 +9,17 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <header class="site-header">
-    <div class="container">
+    <div class="container header-inner">
         <a class="brand" href="<?php echo esc_url(home_url('/')); ?>">Engintenia</a>
-        <nav>
+        <nav class="main-nav">
             <?php wp_nav_menu(['theme_location' => 'primary', 'container' => false, 'fallback_cb' => false]); ?>
         </nav>
+        <div class="lang-switcher" aria-label="Language switcher">
+            <a href="#" class="active">EN</a>
+            <span>|</span>
+            <a href="#">AR</a>
+            <span>|</span>
+            <a href="#">FR</a>
+        </div>
     </div>
 </header>
