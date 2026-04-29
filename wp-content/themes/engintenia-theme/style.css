@@ -1,23 +1,21 @@
 /*
 Theme Name: Engintenia Theme
-Theme URI: https://engintenia.example.com
-Author: Engintenia
-Description: Premium dark engineering marketplace theme for Engintenia platform.
-Version: 1.0.0
-Text Domain: engintenia-theme
 */
 :root{--bg:#050a14;--panel:#0f1a30;--line:#2f4a75;--text:#eaf3ff;--accent:#3b82f6;--accent2:#60a5fa}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top,#10213f,var(--bg));color:var(--text)}
-a{color:#b4d4ff}.container{width:min(1200px,92%);margin:0 auto}
-.site-header{position:sticky;top:0;background:rgba(5,10,20,.72);backdrop-filter:blur(16px);border-bottom:1px solid rgba(102,159,255,.2);z-index:20}.header-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0}.brand{font-size:22px;font-weight:700;color:#fff;text-decoration:none}
-.lang-switcher{display:flex;gap:8px;font-size:13px;padding:8px 12px;border:1px solid rgba(122,181,255,.35);border-radius:999px;background:rgba(16,33,59,.7)}.lang-switcher a{color:#c6e0ff;text-decoration:none}.lang-switcher a.active{color:#fff;font-weight:700}
-.hero{min-height:90vh;display:flex;align-items:center;background:linear-gradient(120deg,rgba(2,8,18,.89),rgba(2,8,18,.58)),url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1900&q=80') center/cover}.hero-card{max-width:720px}
-.eyebrow{display:inline-block;padding:6px 12px;background:rgba(59,130,246,.2);border:1px solid rgba(89,154,255,.4);border-radius:999px}.hero h1{font-size:clamp(2.2rem,4vw,4rem);margin:10px 0 12px}.hero p{max-width:680px;color:#cfdeef;line-height:1.65}
-.fade-in{animation:fadeInUp .8s ease both}@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.cta-row{display:flex;gap:12px;flex-wrap:wrap}.btn{background:linear-gradient(120deg,var(--accent),var(--accent2));padding:12px 18px;border-radius:12px;color:#fff;text-decoration:none;display:inline-block;border:none}.btn.alt{background:rgba(7,16,30,.3);border:1px solid #4f84ff}
-.glass{background:rgba(14,26,48,.56);border:1px solid rgba(120,185,255,.25);backdrop-filter:blur(16px);border-radius:18px;padding:22px}
-.grid{display:grid;gap:18px}.grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}.section{padding:60px 0}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
-.category-card{transition:transform .2s ease}.category-card:hover{transform:translateY(-4px)}
-.stats{display:flex;gap:16px;flex-wrap:wrap}.stat{flex:1;min-width:160px}.search{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:18px}.search input{padding:12px;border-radius:10px;border:1px solid var(--line);background:#081226;color:#fff}
-.page-shell{padding:28px}.site-footer{padding:26px 0;border-top:1px solid rgba(120,185,255,.2);margin-top:40px;color:#afc4dd}
-@media (max-width:900px){.header-inner{flex-wrap:wrap}.search{grid-template-columns:1fr}}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top,#10213f,var(--bg));color:var(--text);font-size:18px;line-height:1.6}
+a{color:#b4d4ff}.container{width:min(1260px,92%);margin:0 auto}
+.site-header{position:sticky;top:0;background:rgba(5,10,20,.78);backdrop-filter:blur(16px);border-bottom:1px solid rgba(102,159,255,.2);z-index:20}.header-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0}.brand{font-size:24px;font-weight:800;color:#fff;text-decoration:none}
+.main-nav ul{display:flex;gap:16px;list-style:none;padding:0;margin:0}.main-nav a{text-decoration:none;color:#d6e6ff}
+.lang-switcher{display:flex;gap:8px;font-size:13px;padding:8px 12px;border:1px solid rgba(122,181,255,.35);border-radius:999px;background:rgba(16,33,59,.7)}
+.lang-switcher a{color:#c6e0ff;text-decoration:none;padding:2px 6px;border-radius:10px}.lang-switcher a.active{color:#fff;font-weight:700;background:rgba(59,130,246,.4)}
+.hero{min-height:88vh;display:flex;align-items:center;background:linear-gradient(120deg,rgba(2,8,18,.89),rgba(2,8,18,.58)),url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1900&q=80') center/cover}.hero-card{max-width:760px}
+.hero h1{font-size:clamp(2.4rem,4vw,4.2rem)}.btn{background:linear-gradient(120deg,var(--accent),var(--accent2));padding:12px 18px;border-radius:12px;color:#fff;text-decoration:none;display:inline-block;border:none;transition:all .2s}.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(59,130,246,.35)}
+.glass,.market-card,.eng-card{background:rgba(14,26,48,.62);border:1px solid rgba(120,185,255,.25);backdrop-filter:blur(16px);border-radius:18px;padding:22px;box-shadow:0 16px 40px rgba(0,0,0,.25)}
+.section{padding:70px 0;border-top:1px solid rgba(120,185,255,.15)}.page-shell{padding:30px}.market-grid{display:grid;gap:24px}.market-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.market-card{padding:0;overflow:hidden;transition:transform .22s,box-shadow .22s}.market-card:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(61,144,255,.35)}.market-card img{width:100%;height:220px;object-fit:cover}.card-content{padding:18px}.card-content h3{margin:0 0 8px;font-size:1.3rem}
+.market-filters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:16px 0 24px}.market-filters select,.market-filters input,.eng-form input,.eng-form textarea{padding:12px;border-radius:10px;border:1px solid var(--line);background:#081226;color:#fff}
+.pricing-card{padding:30px;margin:16px 0;background:linear-gradient(160deg,#10203f,#091224);border-radius:18px}.price{font-size:3rem;margin:0 0 8px;font-weight:800}.price span{font-size:1rem;color:#c2d9fb}
+.dashboard-layout{display:grid;grid-template-columns:280px 1fr;gap:24px}.dashboard-sidebar ul{list-style:none;padding:0}.dashboard-sidebar a{display:block;padding:10px 12px;border-radius:10px;text-decoration:none;color:#d5e6ff}.dashboard-sidebar a:hover{background:#173260}
+.eng-rtl,.eng-rtl *{direction:rtl;text-align:right}
+@media (max-width:1024px){.market-grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}.market-filters{grid-template-columns:1fr 1fr}.dashboard-layout{grid-template-columns:1fr}}
+@media (max-width:680px){.market-grid-3{grid-template-columns:1fr}}

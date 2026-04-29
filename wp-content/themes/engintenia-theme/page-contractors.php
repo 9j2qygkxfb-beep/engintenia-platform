@@ -6,9 +6,10 @@ if (! defined('ABSPATH')) {
 get_header();
 ?>
 <main class="container section">
-    <div class="glass">
-        <h1><?php esc_html_e('Contractors', 'engintenia-theme'); ?></h1>
+    <section class="glass page-shell">
+        <h1><?php esc_html_e('Top Contractors', 'engintenia-theme'); ?></h1>
+        <p><?php esc_html_e('Compare verified specialists by rating, category, and experience.', 'engintenia-theme'); ?></p>
         <?php echo do_shortcode('[eng_contractors_list]'); ?>
-    </div>
+    </section>
 </main>
 <?php get_footer();
